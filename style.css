@@ -1,0 +1,457 @@
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #0cf;
+    --secondary-color: #f70;
+    --accent-color: #0fc;
+    --text-color: #fff;
+    --bg-dark: #000;
+    --bg-semi-transparent: rgba(0, 0, 0, 0.8);
+    --footer-bg: rgba(10, 10, 20, 0.7);
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-color);
+}
+
+/* Game Container */
+#game-container {
+    position: relative;
+    width: 100%;
+    height: calc(100% - 40px); /* Account for footer */
+    overflow: hidden;
+}
+
+/* Canvas */
+#canvas {
+    background: url('images/space-background.jpg') no-repeat center center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    cursor: default;
+}
+
+#canvas.playing {
+    cursor: url('images/crosshair.png') 25 25, auto !important;
+}
+
+/* HUD Elements */
+#hud {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    pointer-events: none;
+}
+
+#score-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#score {
+    font-size: 3rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
+}
+
+#high-score {
+    font-size: 2rem;
+    opacity: 10;
+    text-shadow: 0 0 5px var(--accent-color);
+}
+
+#sound-controls {
+    pointer-events: auto;
+}
+
+#sound-toggle {
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid var(--primary-color);
+    color: var(--text-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#sound-toggle:hover {
+    background: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 15px var(--primary-color);
+}
+
+/* Overlay Screens */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: var(--bg-semi-transparent);
+    z-index: 10;
+    text-align: center;
+    padding: 20px;
+}
+
+.overlay h1 {
+    font-size: 4rem;
+    margin-bottom: 30px;
+    color: var(--primary-color);
+    text-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
+}
+
+.overlay p {
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+    max-width: 600px;
+}
+
+.overlay button {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: var(--bg-dark);
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.5rem;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 20px 0;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 0 20px rgba(12, 255, 204, 0.5);
+    transition: all 0.3s ease;
+}
+
+.overlay button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(12, 255, 204, 0.8);
+}
+
+#final-score, #record-score, #new-record {
+    font-size: 2rem;
+    margin: 10px 0;
+}
+
+#new-record {
+    font-size: 5rem;
+    color: var(--secondary-color);
+    text-shadow: 0 0 20px var(--secondary-color);
+    margin: 30px 0;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Fireworks Animation */
+.fireworks {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Footer */
+footer {
+    width: 100%;
+    height: 40px;
+    background: var(--footer-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid rgba(12, 255, 204, 0.3);
+}
+
+footer p {
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+footer a:hover {
+    color: var(--accent-color);
+    text-shadow: 0 0 5px var(--accent-color);
+}
+
+/* Animations */
+@keyframes laser-beam {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes asteroid-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes planet-glow {
+    0% { filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.5)); }
+    50% { filter: drop-shadow(0 0 25px rgba(0, 255, 255, 0.8)); }
+    100% { filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.5)); }
+}
+
+@keyframes explosion-flash {
+    0% { opacity: 1; transform: scale(0.3); }
+    50% { opacity: 0.8; transform: scale(1.2); }
+    100% { opacity: 0; transform: scale(2); }
+}
+
+@keyframes floating {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes celebrate {
+    0% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.2) rotate(-5deg); }
+    75% { transform: scale(1.2) rotate(5deg); }
+}
+
+/* Enhanced Overlay Animations */
+.overlay h1 {
+    animation: floating 3s ease-in-out infinite;
+}
+
+.high-score-animation {
+    animation: celebrate 1s ease-in-out;
+}
+
+/* Enhanced Game Elements */
+.laser-beam {
+    animation: laser-beam 0.3s linear;
+    filter: drop-shadow(0 0 10px #0ff);
+}
+
+.asteroid {
+    animation: asteroid-spin 20s linear infinite;
+}
+
+.planet-glow {
+    animation: planet-glow 3s ease-in-out infinite;
+}
+
+.explosion {
+    animation: explosion-flash 0.5s ease-out forwards;
+}
+
+/* Particle Effects */
+.particle {
+    position: absolute;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 70%);
+}
+
+/* High Score Celebration */
+.celebration-text {
+    font-size: 4rem;
+    color: gold;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    animation: floating 2s ease-in-out infinite;
+}
+
+.firework-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* Planet Destruction Effects */
+@keyframes fragment-explosion {
+    0% { 
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        filter: brightness(2);
+    }
+    100% { 
+        transform: translate(var(--tx), var(--ty)) scale(0.1) rotate(var(--rot));
+        filter: brightness(1);
+        opacity: 0;
+    }
+}
+
+@keyframes fragment-trail {
+    0% { 
+        transform: scaleX(1) rotate(var(--angle));
+        opacity: 0.8;
+    }
+    100% { 
+        transform: scaleX(0.1) rotate(var(--angle));
+        opacity: 0;
+    }
+}
+
+.planet-fragment {
+    position: absolute;
+    pointer-events: none;
+    transform-origin: center;
+    z-index: 3;
+}
+
+.fragment-trail {
+    position: absolute;
+    pointer-events: none;
+    transform-origin: center;
+    z-index: 2;
+    filter: brightness(1.5);
+}
+
+/* Screen Shake */
+@keyframes screen-shake {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(var(--shake-x), var(--shake-y)); }
+    75% { transform: translate(calc(var(--shake-x) * -1), calc(var(--shake-y) * -1)); }
+}
+
+.screen-shake {
+    animation: screen-shake 0.1s ease-in-out;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #score {
+        font-size: 2rem;
+    }
+    
+    #high-score {
+        font-size: 0.9rem;
+    }
+    
+    .overlay h1 {
+        font-size: 3rem;
+    }
+    
+    .overlay p {
+        font-size: 1.2rem;
+    }
+    
+    .overlay button {
+        padding: 12px 30px;
+        font-size: 1.2rem;
+    }
+    
+    #new-record {
+        font-size: 3.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #hud {
+        padding: 10px;
+    }
+    
+    #score {
+        font-size: 1.5rem;
+    }
+    
+    #high-score {
+        font-size: 0.8rem;
+    }
+    
+    #sound-toggle {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+    }
+    
+    .overlay h1 {
+        font-size: 2rem;
+    }
+    
+    .overlay p {
+        font-size: 1rem;
+    }
+    
+    .overlay button {
+        padding: 10px 25px;
+        font-size: 1rem;
+    }
+    
+    #final-score, #record-score {
+        font-size: 1.5rem;
+    }
+    
+    #new-record {
+        font-size: 2.5rem;
+    }
+    
+    footer p {
+        font-size: 0.9rem;
+    }
+}
+
+/* Score Animations */
+@keyframes high-score-pulse {
+    0% { transform: scale(1); color: var(--text-color); }
+    50% { transform: scale(1.2); color: gold; }
+    100% { transform: scale(1); color: var(--text-color); }
+}
+
+.high-score-pulse {
+    animation: high-score-pulse 0.5s ease-in-out;
+}
+
+/* Weapon Effects */
+@keyframes muzzle-flash {
+    0% { transform: scale(0.5); opacity: 1; filter: brightness(1.5); }
+    50% { transform: scale(1.5); opacity: 0.8; filter: brightness(2); }
+    100% { transform: scale(0.5); opacity: 0; filter: brightness(1.5); }
+}
+
+@keyframes bullet-trail {
+    0% { 
+        opacity: 0.8;
+        transform: scaleY(0.3);
+    }
+    100% { 
+        opacity: 0;
+        transform: scaleY(1);
+    }
+}
+
+.muzzle-flash {
+    position: absolute;
+    background: radial-gradient(circle, rgba(255,200,100,1) 0%, rgba(255,160,50,0.8) 50%, rgba(255,100,0,0) 100%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 2;
+    animation: muzzle-flash 0.15s ease-out forwards;
+}
+
+.bullet-trail {
+    position: absolute;
+    background: linear-gradient(to top, rgba(0,255,255,0) 0%, rgba(0,255,255,0.4) 50%, rgba(0,255,255,0) 100%);
+    pointer-events: none;
+    transform-origin: top;
+    z-index: 1;
+    animation: bullet-trail 0.2s ease-out forwards;
+}

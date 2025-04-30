@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planet Defence</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="canvas"></canvas>
+        
+        <!-- Game HUD Elements -->
+        <div id="hud">
+            <div id="score-container">
+                <div id="score" class="glow-text">0</div>
+                <div id="high-score">High Score: 0</div>
+            </div>
+            
+            <div id="sound-controls">
+                <button id="sound-toggle" aria-label="Toggle Sound">🔊</button>
+            </div>
+        </div>
+        
+        <!-- Game Overlays -->
+        <div id="start-screen" class="overlay">
+            <h1 class="animate__animated animate__pulse animate__infinite">Planet Defence</h1>
+            <p>Protect your planet from incoming asteroids!</p>
+            <button id="start-button" class="animate__animated animate__heartBeat animate__infinite">START GAME</button>
+        </div>
+        
+        <div id="game-over-screen" class="overlay hidden">
+            <h1 class="animate__animated animate__wobble">GAME OVER</h1>
+            <div id="final-score">Score: 0</div>
+            <div id="record-score">Record: 0</div>
+            <button id="restart-button" class="animate__animated animate__pulse animate__infinite">PLAY AGAIN</button>
+        </div>
+        
+        <div id="high-score-screen" class="overlay hidden">
+            <h1 class="animate__animated animate__tada">NEW HIGH SCORE!</h1>
+            <div id="new-record" class="glow-text">0</div>
+            <div class="fireworks"></div>
+            <button id="continue-button" class="animate__animated animate__pulse animate__infinite">CONTINUE</button>
+        </div>
+        
+        <!-- Effects Container -->
+        <div id="effects-container"></div>
+    </div>
+    
+    <!-- Audio elements with better sound effects -->
+    <audio id="laser-sound" src="https://www.myinstants.com/media/sounds/laser-gun.mp3" preload="auto"></audio>
+    <audio id="explosion-sound" src="https://www.myinstants.com/media/sounds/explosion-sound-effect.mp3" preload="auto"></audio>
+    <audio id="game-over-sound" src="https://www.myinstants.com/media/sounds/game-over-sound-effect.mp3" preload="auto"></audio>
+    <audio id="high-score-sound" src="https://www.myinstants.com/media/sounds/success-fanfare-trumpets.mp3" preload="auto"></audio>
+    <audio id="background-music" src="https://www.myinstants.com/media/sounds/space-atmospheric-background.mp3" loop preload="auto"></audio>
+    
+    <footer>
+        <p>Made by <a href="https://jijanurrahman.netlify.app/" target="_blank">Jijanur Rahman</a> &copy; 2025</p>
+    </footer>
+</body>
+</html>
