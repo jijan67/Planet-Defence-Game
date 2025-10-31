@@ -1,7 +1,7 @@
 # Planet Defence Game
 Planet Defence is a space shooter where you protect your planet from incoming asteroids. Rotate your ship to aim and click to shoot. Destroy asteroids before they hit your planet or face game over. Features include score tracking, high score system, visual effects, and responsive design for all devices.
 ---
-## [🎮 Play Online ](https://jijan67.github.io/Planet-Defence-Game/)
+## [🎮 Play Online ](https://jijanurrahman.github.io/Planet-Defence-Game/)
 ---
 [![Download](https://img.shields.io/badge/Download-APK-blue.svg?style=flat&logo=android)](https://drive.google.com/file/d/1lkUiF6BXeI0cg1Lu9TFktnx6zRlp4T4L/view?usp=sharing)
 ---
